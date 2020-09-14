@@ -9,8 +9,16 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        ScrollViewReader { scrollViewReader in
+            List(1...100, id: \.self) { item in
+                Text("Item \(item)")
+                    .onTapGesture(count: 1, perform: {
+                        withAnimation {
+                            scrollViewReader.scrollTo(item)
+                        }
+                    })
+            }
+        }
     }
 }
 
